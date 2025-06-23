@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# SQLite database
+*.db
+
+# Flask instance folder
+instance/
+
+# Env files
+.env
+*.env
+
+# VS Code settings 
+.vscode/
+
+# Mac/Linux/Windows system files 
+.DS_Store
+Thumbs.db

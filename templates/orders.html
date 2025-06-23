@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Orders</title>
+    <style>
+        body { font-family: Arial; margin: 20px; }
+        .order { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+        .item { margin-left: 20px; }
+    </style>
+</head>
+<body>
+    <h1>All Orders</h1>
+
+    {% for order in orders %}
+        <div class="order">
+            <strong>Order ID:</strong> {{ order.id }} <br>
+            <strong>Table:</strong> {{ order.table_id }} <br>
+            <strong>Status:</strong> {{ order.status }} <br>
+            <strong>Total:</strong> ${{ order.total_price }} <br>
+            <strong>Time:</strong> {{ order.timestamp }} <br>
+
+            <h4>Items:</h4>
+            <ul>
+                {% for item in order.items %}
+                    <li class="item">
+                        {{ item.item.name }} × {{ item.quantity }}
+                        = ${{ item.quantity * item.item.price }}
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
+</body>
+</html>

@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 from datetime import datetime
 
 # Connect to PostgreSQL
-engine = create_engine("postgresql://user:pass@localhost:5432/mydb", echo=True)
+engine = create_engine("sqlite:///database.db", echo=True)
 Base = declarative_base()
 Session = sessionmaker(bind=engine)
 
@@ -13,7 +13,7 @@ class Table(Base):
     __tablename__ = "tables"
 
     id = Column(Integer, primary_key=True)
-    #qr_code_url = Column(String(255), nullable=False)
+    qr_code_url = Column(String(255), nullable=False)
     orders = relationship("Order", back_populates="table")
 
 
