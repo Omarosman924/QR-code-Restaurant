@@ -51,3 +51,6 @@ Customers can scan a QR code (currently simulated by accessing `/1`, `/2`, `/3`,
    ```bash
    git clone https://github.com/your-username/qr-code-restaurant.git
    cd qr-code-restaurant
+   pip install -r requirements.txt
+   python seed_data.py
+   python app.py
