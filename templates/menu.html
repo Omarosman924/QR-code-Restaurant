@@ -1,32 +1,128 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Menu - Table {{ table_id }}</title>
-    <style>
-        .item {
-            margin-bottom: 15px;
-        }
-        input[type=number] {
-            width: 50px;
-        }
-    </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🍽️ Menu - Table {{ table_id }}</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f6f6f6;
+      padding: 20px;
+      color: #333;
+      margin: 0;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #444;
+    }
+
+    .menu-container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .menu-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .menu-info {
+      flex: 1 1 60%;
+      margin-bottom: 10px;
+    }
+
+    .menu-info strong {
+      font-size: 1.1em;
+      display: block;
+    }
+
+    .menu-actions {
+      flex: 1 1 35%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+    }
+
+    input[type=number] {
+      width: 60px;
+      padding: 5px;
+      font-size: 1em;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #28a745;
+      border: none;
+      color: white;
+      font-size: 1.1em;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 25px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    @media (max-width: 600px) {
+      .menu-item {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .menu-actions {
+        width: 100%;
+        justify-content: flex-start;
+      }
+
+      input[type=number] {
+        width: 100%;
+        max-width: 100px;
+      }
+
+      button {
+        font-size: 1.2em;
+        padding: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <h1>Menu - Table {{ table_id }}</h1>
 
-<form method="POST" action="/add-to-order/{{ table_id }}">
-  {% for item in menu_items %}
-    <div style="margin-bottom: 1em;">
-      <strong>{{ item.name }}</strong> — ${{ item.price }}<br>
+  <div class="menu-container">
+    <h1>🪑 Table {{ table_id }} - Menu</h1>
 
-      Quantity:
-      <input type="number" name="quantities[{{ item.id }}]" value="0" min="0">
-      
-      <input type="hidden" name="prices[{{ item.id }}]" value="{{ item.price }}">
-    </div>
-  {% endfor %}
+    <form method="POST" action="/add-to-order/{{ table_id }}">
+      {% for item in menu_items %}
+        <div class="menu-item">
+          <div class="menu-info">
+            <strong>{{ item.name }}</strong>
+            <span>${{ item.price }}</span>
+          </div>
+          <div class="menu-actions">
+            <input type="number" name="quantities[{{ item.id }}]" value="0" min="0">
+            <input type="hidden" name="prices[{{ item.id }}]" value="{{ item.price }}">
+          </div>
+        </div>
+      {% endfor %}
 
-  <button type="submit">Add Order</button>
-</form>
+      <button type="submit">➕ Add Order</button>
+    </form>
+  </div>
+
 </body>
 </html>
